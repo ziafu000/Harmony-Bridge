@@ -1,0 +1,1470 @@
+/* =========================
+   RESET & BASE
+   ========================= */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body.app {
+    min-height: 100vh;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+    line-height: 1.5;
+    background: var(--color-bg-page);
+    color: var(--color-text-main);
+}
+
+/* Helpers */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+button {
+    font-family: inherit;
+}
+
+/* Layout container */
+.app-shell {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 16px 40px;
+}
+
+/* =========================
+   HEADER
+   ========================= */
+.app-header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 12px 18px;
+    margin: -24px -16px 16px;
+    background: var(--color-header-bg);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.app-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.app-logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    background: var(--color-accent);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    box-shadow: var(--shadow-soft);
+}
+
+.app-title h1 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.app-title p {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+/* Top nav */
+.app-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-item {
+    border: none;
+    outline: none;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.16s ease, color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.nav-item.is-active {
+    color: var(--color-accent-contrast);
+    background: var(--color-accent-soft);
+    box-shadow: 0 0 0 1px var(--color-accent-outline);
+}
+
+/* Header actions */
+.app-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.theme-switcher {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+.theme-switcher select {
+    border-radius: 999px;
+    border: 1px solid var(--color-border-subtle);
+    background: var(--color-card-bg);
+    padding: 4px 10px;
+    font-size: 13px;
+    color: var(--color-text-main);
+}
+
+/* =========================
+   BUTTONS
+   ========================= */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: none;
+    outline: none;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.16s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 26px rgba(15, 23, 42, 0.18);
+    background: var(--color-accent-hover);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 6px 14px rgba(15, 23, 42, 0.12);
+}
+
+.btn-small {
+    padding: 6px 10px;
+    font-size: 12px;
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--color-accent);
+    box-shadow: none;
+    border: 1px solid var(--color-accent-soft);
+}
+
+.btn-outline:hover {
+    background: var(--color-accent-soft);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--color-text-muted);
+    box-shadow: none;
+    border-radius: 999px;
+    padding-inline: 10px;
+}
+
+.btn-ghost:hover {
+    background: rgba(148, 163, 184, 0.16);
+}
+
+/* =========================
+   MAIN
+   ========================= */
+.app-main {
+    margin-top: 16px;
+}
+
+/* Section header */
+.section-header {
+    margin-bottom: 16px;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.section-header p {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+/* Tab panels */
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.is-active {
+    display: block;
+}
+
+/* Section grid */
+.section-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 2fr);
+    gap: 16px;
+}
+
+/* =========================
+   CARDS
+   ========================= */
+.card {
+    background: var(--color-card-bg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-subtle);
+    padding: 14px 16px 16px;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 4px;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.card-body {
+    font-size: 13px;
+    color: var(--color-text-main);
+}
+
+/* Badge */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    background: var(--color-badge-bg);
+    color: var(--color-badge-text);
+}
+
+/* Placeholder text */
+.placeholder {
+    margin: 0;
+    font-size: 13px;
+    color: var(--color-text-muted);
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: var(--color-placeholder-bg);
+}
+
+/* =========================
+   STUDY TAB SPECIFIC
+   ========================= */
+
+/* Roadmap */
+.card-roadmap {
+    grid-row: span 2;
+}
+
+#roadmapContainer {
+    min-height: 120px;
+}
+
+/* Roadmap – group theo ngày, mỗi ngày là 1 card gồm nhiều nhiệm vụ nhỏ */
+
+.roadmap-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.roadmap-day-block {
+    border-radius: 12px;
+    background: var(--color-stat-bg);
+    padding: 10px 12px;
+}
+
+/* header ngày */
+.roadmap-day-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.roadmap-day-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.roadmap-day-main {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.roadmap-day-sub {
+    font-size: 11px;
+    color: var(--color-text-muted);
+}
+
+.roadmap-day-meta {
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+/* danh sách nhiệm vụ trong 1 ngày */
+.roadmap-task-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.roadmap-task {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.85);
+}
+
+.roadmap-task-main {
+    flex: 1;
+    font-size: 13px;
+    color: var(--color-text-main);
+}
+
+/* phần subject + status ở bên phải */
+.roadmap-task-extra {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.roadmap-task-subject {
+    font-size: 11px;
+    color: var(--color-text-muted);
+    padding: 2px 6px;
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.16);
+}
+
+/* Status pill đã có sẵn trước đó, giữ nguyên:
+.status-pill, .status-pill--pending, .status-pill--active, .status-pill--done, .status-pill--remedy
+*/
+
+/* Mobile: cho task xuống 2 dòng cho đỡ chật */
+@media (max-width: 640px) {
+    .roadmap-task {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .roadmap-task-extra {
+        justify-content: flex-start;
+    }
+}
+
+
+/* Today lesson */
+.lesson-video-placeholder,
+.lesson-quiz-placeholder {
+    border-radius: 12px;
+    border: 1px dashed var(--color-border-subtle);
+    padding: 10px 12px;
+    font-size: 12px;
+    color: var(--color-text-muted);
+    margin-bottom: 8px;
+}
+
+/* Stats */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.stat-item {
+    padding: 8px 10px;
+    border-radius: 12px;
+    background: var(--color-stat-bg);
+}
+
+.stat-label {
+    display: block;
+    font-size: 11px;
+    color: var(--color-text-muted);
+    margin-bottom: 2px;
+}
+
+.stat-value {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+/* Heatmap */
+.skill-heatmap {
+    border-radius: 12px;
+    border: 1px dashed var(--color-border-subtle);
+    padding: 10px 12px;
+    min-height: 80px;
+}
+
+/* Teach-back */
+.teachback-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 8px;
+}
+
+.teachback-status {
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+.teachback-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* =========================
+   HEALTH TAB SPECIFIC
+   ========================= */
+.card-mood {
+    grid-column: span 1;
+}
+
+.mood-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.mood-option {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 1px solid var(--color-border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.16s ease, transform 0.1s ease, box-shadow 0.16s ease;
+}
+
+.mood-option.is-selected {
+    background: var(--color-accent-soft);
+    box-shadow: 0 0 0 1px var(--color-accent-outline);
+    transform: translateY(-1px);
+}
+
+.mood-suggestion {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+/* Focus mode */
+.card-focus .focus-config {
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+
+.card-focus input[type="number"] {
+    width: 72px;
+    padding: 4px 6px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border-subtle);
+    font-size: 13px;
+}
+
+.focus-timer {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 6px 0 10px;
+}
+
+.focus-controls {
+    display: flex;
+    gap: 8px;
+}
+
+/* Wellbeing list */
+#wellbeingList {
+    max-height: 260px;
+    overflow: auto;
+}
+
+/* LWI */
+.lwi-score {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.lwi-desc {
+    margin: 0 0 8px;
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+.lwi-history {
+    min-height: 60px;
+    border-radius: 10px;
+    border: 1px dashed var(--color-border-subtle);
+    padding: 6px 10px;
+    font-size: 12px;
+}
+
+/* =========================
+   RELATIONSHIP TAB SPECIFIC
+   ========================= */
+.gift-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.gift-form label {
+    font-size: 13px;
+    color: var(--color-text-main);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.gift-form input[type="text"],
+.gift-form textarea {
+    border-radius: 10px;
+    border: 1px solid var(--color-border-subtle);
+    padding: 7px 9px;
+    font-size: 13px;
+    resize: vertical;
+    min-height: 36px;
+}
+
+.gift-form textarea {
+    min-height: 70px;
+}
+
+.checkbox {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+.checkbox input[type="checkbox"] {
+    margin-top: 3px;
+}
+
+.gift-preview {
+    margin-top: 10px;
+}
+
+/* Demo gift card */
+.gift-card-demo {
+    border-radius: 16px;
+    border: 1px solid var(--color-border-subtle);
+    padding: 12px 14px;
+    background: var(--color-accent-soft);
+}
+
+.gift-card-demo .gift-title {
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.gift-card-demo .gift-occasion {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    margin-bottom: 6px;
+}
+
+.gift-card-demo .gift-message {
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.gift-card-demo .gift-footer {
+    font-size: 11px;
+    color: var(--color-text-muted);
+}
+
+/* Missions */
+#missionsList {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.mission-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+}
+
+.mission-item input[type="checkbox"] {
+    accent-color: var(--color-accent);
+}
+
+/* Social summary */
+.summary-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+}
+
+.summary-list li {
+    padding: 4px 0;
+}
+
+/* =========================
+   SERIES MODAL (POPUP VIDEO)
+   ========================= */
+
+.series-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.series-modal.is-hidden {
+    display: none;
+}
+
+.series-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    /* nền mờ */
+}
+
+.series-modal-dialog {
+    position: relative;
+    z-index: 1;
+    width: min(960px, 100% - 32px);
+    max-height: 80vh;
+    background: var(--color-card-bg);
+    border-radius: 18px;
+    border: 1px solid var(--color-border-subtle);
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.28);
+    padding: 16px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.series-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 4px;
+}
+
+.series-modal-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.series-modal-close {
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px 6px;
+    border-radius: 999px;
+}
+
+.series-modal-close:hover {
+    background: rgba(148, 163, 184, 0.18);
+}
+
+/* Tabs scroll ngang */
+.series-tabs-wrapper {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin-bottom: 6px;
+}
+
+.series-tab {
+    flex: 0 0 auto;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--color-border-subtle);
+    background: #ffffff;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+}
+
+.series-tab.is-active {
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+}
+
+/* Panels */
+.series-panels {
+    flex: 1;
+    overflow: auto;
+}
+
+.series-panel {
+    display: none;
+}
+
+.series-panel.is-active {
+    display: block;
+}
+
+/* Grid video */
+.series-video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+}
+
+.series-video-grid iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    border: 1px solid var(--color-border-subtle);
+}
+
+/* Mobile tweak */
+@media (max-width: 640px) {
+    .series-modal-dialog {
+        padding-inline: 12px;
+    }
+}
+
+/* =========================
+   HOME HUB 3.0
+   ========================= */
+
+.home-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1.3fr);
+    gap: 16px;
+}
+
+/* 3 thẻ game */
+.card-home-games {
+    grid-column: 1 / -1;
+}
+
+.home-games {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.game-card {
+    border-radius: 16px;
+    border: 1px solid var(--color-border-subtle);
+    padding: 12px 12px;
+    background: var(--color-bg-page);
+    cursor: pointer;
+    text-align: left;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease,
+        background 0.12s ease;
+}
+
+.game-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 32px rgba(15, 23, 42, 0.18);
+    border-color: var(--color-accent-outline);
+    background: #ffffff;
+}
+
+.game-card-title {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.game-card-desc {
+    margin: 0;
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+/* Daily Quest strip */
+.card-daily-quest {
+    grid-column: 1 / -1;
+}
+
+.daily-quest-strip {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.quest-item {
+    flex: 1;
+    border-radius: 999px;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    border: 1px solid var(--color-border-subtle);
+    background: var(--color-card-bg);
+    color: var(--color-text-muted);
+    transition: background 0.16s ease, color 0.16s ease, box-shadow 0.16s ease,
+        border-color 0.16s ease;
+}
+
+.quest-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    background: var(--color-placeholder-bg);
+}
+
+.quest-text-main {
+    font-weight: 500;
+    color: var(--color-text-main);
+}
+
+.quest-text-sub {
+    font-size: 11px;
+    color: var(--color-text-muted);
+}
+
+/* Khi hoàn thành quest */
+.quest-item.is-done {
+    background: var(--color-accent);
+    border-color: var(--color-accent-outline);
+    color: var(--color-accent-contrast);
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+}
+
+.quest-item.is-done .quest-icon {
+    background: rgba(15, 23, 42, 0.16);
+}
+
+.quest-item.is-done .quest-text-main,
+.quest-item.is-done .quest-text-sub {
+    color: var(--color-accent-contrast);
+}
+
+.daily-quest-note {
+    margin: 8px 0 0;
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+/* Level lớp */
+.card-class-level {
+    align-self: stretch;
+}
+
+.class-level-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.class-level-main {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.class-level-label {
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+.class-level-value {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.class-level-max {
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+.class-level-bar {
+    width: 100%;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--color-placeholder-bg);
+    overflow: hidden;
+}
+
+.class-level-bar-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: inherit;
+    background: var(--color-accent);
+    transition: width 0.25s ease;
+}
+
+.class-level-hint {
+    margin: 2px 0 0;
+    font-size: 11px;
+    color: var(--color-text-muted);
+}
+
+/* Animation khi lên level */
+.class-level-value.levelup-anim {
+    animation: levelPulse 0.6s ease-out;
+}
+
+@keyframes levelPulse {
+    0% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.levelup-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #0f172a;
+    color: #fff;
+    font-size: 13px;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.4);
+    z-index: 100;
+}
+
+/* Mobile chỉnh lại home grid */
+@media (max-width: 960px) {
+    .home-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .home-games {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* =========================
+   STUDY – BOSS RUSH MAP 14D
+   ========================= */
+.study-bossrush-block .sub-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.study-map-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.study-map-cell {
+    border-radius: 6px;
+    padding: 6px 2px;
+    font-size: 11px;
+    text-align: center;
+    background: rgba(148, 163, 184, 0.12);
+    color: var(--color-text-muted);
+}
+
+.study-map-cell .day-label {
+    display: block;
+    font-weight: 600;
+}
+
+.study-map-cell .day-stars {
+    display: block;
+    font-size: 10px;
+    margin-top: 2px;
+}
+
+/* trạng thái mastery */
+.study-map-cell--stars1 {
+    background: rgba(248, 113, 113, 0.2);
+}
+
+.study-map-cell--stars2 {
+    background: rgba(251, 191, 36, 0.22);
+}
+
+.study-map-cell--stars3 {
+    background: rgba(52, 211, 153, 0.24);
+}
+
+/* ô đang chơi hôm nay */
+.study-map-cell--active {
+    outline: 2px solid var(--color-accent, #f97316);
+    outline-offset: 1px;
+}
+
+/* recap */
+.study-recap-card {
+    border-radius: 8px;
+    padding: 8px 10px;
+    background: rgba(34, 197, 94, 0.14);
+    font-size: 0.9rem;
+}
+
+.study-recap-card .recap-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2px;
+}
+
+.study-recap-card .recap-stars {
+    font-size: 1rem;
+}
+
+/* =========================
+   STUDY – RESOURCE / SHOP / LOADOUT
+   ========================= */
+.card-resources .stat-item .stat-value,
+.card-loadout .stat-item .stat-value {
+    font-weight: 700;
+}
+
+.shop-moves-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.shop-move-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 8px;
+    border-radius: 8px;
+    background: rgba(148, 163, 184, 0.12);
+    font-size: 0.85rem;
+}
+
+.shop-move-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.shop-move-name {
+    font-weight: 600;
+}
+
+.shop-move-meta {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+}
+
+.shop-move-cost {
+    font-size: 0.8rem;
+}
+
+.shop-move-level {
+    font-size: 0.8rem;
+}
+
+.shop-move-btn {
+    font-size: 0.8rem;
+}
+
+/* Loadout */
+.loadout-moves-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.loadout-pill {
+    border-radius: 999px;
+    padding: 4px 10px;
+    border: 1px solid rgba(148, 163, 184, 0.8);
+    font-size: 0.8rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.loadout-pill.is-active {
+    background: var(--color-accent-soft, rgba(249, 115, 22, 0.14));
+    border-color: var(--color-accent, #f97316);
+}
+
+/* =========================
+   BOSS ARENA
+   ========================= */
+.card-boss .boss-hp-block {
+    margin-bottom: 8px;
+}
+
+.boss-hp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.boss-week-label {
+    font-weight: 600;
+}
+
+.boss-hp-bar {
+    width: 100%;
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.3);
+    overflow: hidden;
+}
+
+.boss-hp-bar-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #f97316, #ef4444);
+    transition: width 0.4s ease;
+}
+
+.boss-hp-text {
+    font-size: 0.8rem;
+    margin-top: 4px;
+    color: var(--color-text-muted);
+}
+
+.boss-battle-log {
+    max-height: 160px;
+    overflow-y: auto;
+    font-size: 0.8rem;
+    padding: 6px 8px;
+    border-radius: 8px;
+    background: rgba(15, 23, 42, 0.03);
+}
+
+.boss-battle-log-entry {
+    margin-bottom: 4px;
+}
+
+.boss-hof-list {
+    padding-left: 1.2rem;
+    font-size: 0.85rem;
+}
+
+.boss-hof-list li span {
+    font-weight: 600;
+}
+
+.series-video-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+@media (max-width: 900px) {
+    .series-video-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 520px) {
+    .series-video-grid {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+}
+
+.video-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform .15s ease, border-color .15s ease;
+}
+
+.video-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+.video-card img {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    /* Shorts */
+    object-fit: cover;
+    display: block;
+}
+
+.video-caption {
+    padding: 8px 10px;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+/* =========================
+    FOOTER
+   ========================= */
+.app-footer {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border-subtle);
+    font-size: 12px;
+    color: var(--color-text-muted);
+    text-align: center;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+@media (max-width: 960px) {
+    .app-header {
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+
+    .app-nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        margin-top: 8px;
+    }
+
+    .app-actions {
+        margin-left: auto;
+    }
+
+    .section-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .card-roadmap {
+        grid-row: auto;
+    }
+}
+
+@media (max-width: 640px) {
+    .app-shell {
+        padding-inline: 12px;
+    }
+
+    .app-header {
+        margin-inline: -12px;
+    }
+
+    .section-header h2 {
+        font-size: 18px;
+    }
+
+    .card {
+        padding-inline: 12px;
+    }
+}
+
+.roadmap-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.roadmap-day {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.roadmap-day-main {
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.roadmap-day-sub {
+    font-size: 11px;
+    color: var(--color-text-muted);
+}
+
+.roadmap-status {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* Hôm nay */
+.status-pill--today {
+    background: rgba(37, 99, 235, 0.16);
+    /* xanh dương */
+    color: #1d4ed8;
+}
+
+/* Thiếu (trễ) */
+.status-pill--overdue {
+    background: rgba(239, 68, 68, 0.16);
+    /* đỏ */
+    color: #b91c1c;
+}
+
+/* Sắp tới */
+.status-pill--upcoming {
+    background: rgba(34, 197, 94, 0.16);
+    /* xanh lá nhạt */
+    color: #16a34a;
+}
+
+/* Chưa rõ ngày / chưa xếp lịch */
+.status-pill--pending {
+    background: rgba(148, 163, 184, 0.18);
+    /* xám */
+    color: var(--color-text-main);
+}
+
+
+/* Today Lesson – hiển thị nhiệm vụ theo lộ trình */
+.today-tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.today-desc {
+    margin: 0;
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+.today-task-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.today-task-item {
+    padding: 6px 8px;
+    border-radius: 9px;
+    background: var(--color-stat-bg);
+}
+
+.today-task-title {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.today-task-meta {
+    font-size: 11px;
+    color: var(--color-text-muted);
+}
+
+.package-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 10px;
+    background: var(--color-surface);
+    font-size: 12px;
+}
+
+.package-switcher select {
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    font-size: 12px;
+    font-weight: 500;
+    outline: none;
+}
+
+.badge-package {
+    margin-left: 6px;
+}

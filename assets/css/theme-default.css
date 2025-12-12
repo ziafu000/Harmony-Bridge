@@ -1,0 +1,42 @@
+/* Theme: Default – Formal, sáng sủa, chuyên nghiệp */
+
+:root,
+:root[data-theme="default"] {
+    /* Màu nền */
+    --color-bg-page: #f3f4f6;
+    /* slate-100 */
+    --color-header-bg: rgba(248, 250, 252, 0.92);
+    /* slate-50 with blur */
+    --color-card-bg: #ffffff;
+
+    /* Border & shadow */
+    --color-border-subtle: #e2e8f0;
+    /* slate-200 */
+    --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.06);
+
+    /* Text */
+    --color-text-main: #0f172a;
+    /* slate-900 */
+    --color-text-muted: #64748b;
+    /* slate-500 */
+
+    /* Accent */
+    --color-accent: #2563eb;
+    /* blue-600 */
+    --color-accent-hover: #1d4ed8;
+    /* blue-700 */
+    --color-accent-soft: rgba(37, 99, 235, 0.09);
+    --color-accent-outline: rgba(37, 99, 235, 0.55);
+    --color-accent-contrast: #ffffff;
+
+    /* Badge & placeholder */
+    --color-badge-bg: rgba(15, 23, 42, 0.05);
+    --color-badge-text: #0f172a;
+    --color-placeholder-bg: rgba(148, 163, 184, 0.1);
+
+    /* Component backgrounds */
+    --color-stat-bg: #f9fafb;
+
+    /* Radius */
+    --radius-lg: 18px;
+}

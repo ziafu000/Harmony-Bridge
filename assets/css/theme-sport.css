@@ -1,0 +1,216 @@
+/* =========================================
+   THEME: SPORT – năng lượng, game-like
+   ========================================= */
+
+/* Palette chính dùng biến, base.css sẽ đọc các biến này */
+:root,
+:root[data-theme="sport"] {
+    /* Nền chung */
+    --color-bg-page: #fdf4e6;
+    /* kem ấm */
+    --color-header-bg: rgba(229, 248, 255, 0.96);
+    /* trắng xanh nhẹ */
+    --color-card-bg: #fffdf8;
+    /* card trắng kem */
+
+    /* Border & shadow */
+    --color-border-subtle: rgba(255, 187, 120, 0.4);
+    --shadow-soft: 0 20px 45px rgba(15, 23, 42, 0.16);
+
+    /* Text */
+    --color-text-main: #1f2933;
+    --color-text-muted: #9ca3af;
+
+    /* Accent xanh (giống nút “Học hôm nay”) */
+    --color-accent: #3ac5ff;
+    --color-accent-hover: #24b0f0;
+    --color-accent-soft: rgba(58, 197, 255, 0.16);
+    --color-accent-outline: rgba(58, 197, 255, 0.7);
+    --color-accent-contrast: #ffffff;
+
+    /* Badge & placeholder */
+    --color-badge-bg: rgba(255, 187, 120, 0.12);
+    --color-badge-text: #c05621;
+    --color-placeholder-bg: rgba(255, 255, 255, 0.8);
+
+    /* Component backgrounds */
+    --color-stat-bg: #fff7eb;
+
+    /* Card radius to hơn giống UI */
+    --radius-lg: 26px;
+}
+
+/* ===== BACKGROUND & HEADER ===== */
+
+[data-theme="sport"] body.app {
+    /* Nền loang xanh + cam như mockup */
+    background:
+        radial-gradient(circle at 15% 0, #e0f5ff 0, transparent 55%),
+        radial-gradient(circle at 85% 100%, #ffe2bf 0, transparent 55%),
+        #fdf4e6;
+}
+
+[data-theme="sport"] .app-header {
+    border-bottom: none;
+    background: linear-gradient(135deg, #e8f9ff, #fff7eb);
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.16);
+}
+
+/* Logo H³ kiểu badge tròn hơn, nổi hơn */
+[data-theme="sport"] .app-logo {
+    border-radius: 20px;
+    background: linear-gradient(145deg, #ffb355, #ffda6c);
+    box-shadow: 0 14px 30px rgba(245, 158, 11, 0.55);
+}
+
+/* ===== NAV ===== */
+
+[data-theme="sport"] .nav-item {
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 999px;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="sport"] .nav-item.is-active {
+    background: #ffffff;
+    color: #111827;
+    box-shadow: 0 10px 24px rgba(59, 130, 246, 0.28);
+}
+
+/* ===== CARD ===== */
+
+[data-theme="sport"] .card {
+    position: relative;
+    border-radius: 26px;
+    border: none;
+    background: #fffdf8;
+    box-shadow: 0 22px 55px rgba(15, 23, 42, 0.18);
+}
+
+/* highlight nhẹ trên đầu card giống các plate trong mockup */
+[data-theme="sport"] .card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at 10% 0, rgba(186, 230, 253, 0.45), transparent 55%);
+    opacity: 0.55;
+    pointer-events: none;
+    mix-blend-mode: soft-light;
+}
+
+/* Nội dung card không bị ảnh hưởng overlay */
+[data-theme="sport"] .card>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* Header trong card */
+[data-theme="sport"] .card-header h3 {
+    font-weight: 700;
+}
+
+/* ===== BUTTONS (Học hôm nay / Đánh boss vibe) ===== */
+
+[data-theme="sport"] .btn {
+    border-radius: 999px;
+    padding: 11px 22px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    background: linear-gradient(135deg, #3ac5ff, #24b0f0);
+    box-shadow: 0 18px 40px rgba(36, 176, 240, 0.6);
+}
+
+[data-theme="sport"] .btn:hover {
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 0 22px 50px rgba(36, 176, 240, 0.7);
+}
+
+/* Nút ghost = icon bar phía dưới */
+[data-theme="sport"] .btn-ghost {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 999px;
+    padding-inline: 14px;
+    box-shadow: 0 10px 26px rgba(15, 23, 42, 0.12);
+    color: #4b5563;
+}
+
+/* Outline = giống tag Today’s sport */
+[data-theme="sport"] .btn-outline {
+    background: #fffdf8;
+    border-radius: 999px;
+    border: 1px solid rgba(58, 197, 255, 0.5);
+    color: #0f172a;
+    box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+}
+
+/* Nếu sau này em có thêm class .btn-boss thì dùng style cam: */
+[data-theme="sport"] .btn-boss {
+    background: linear-gradient(135deg, #ffb55a, #ff9f4a);
+    box-shadow: 0 18px 40px rgba(248, 152, 56, 0.7);
+    color: #ffffff;
+}
+
+/* ===== BADGE & STATUS PILL ===== */
+
+[data-theme="sport"] .badge {
+    background: rgba(58, 197, 255, 0.12);
+    color: #0284c7;
+    font-weight: 600;
+}
+
+/* pill trạng thái trong roadmap */
+[data-theme="sport"] .status-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+[data-theme="sport"] .status-pill--today {
+    background: rgba(58, 197, 255, 0.18);
+    color: #0369a1;
+}
+
+[data-theme="sport"] .status-pill--overdue {
+    background: rgba(248, 113, 113, 0.16);
+    color: #b91c1c;
+}
+
+[data-theme="sport"] .status-pill--upcoming {
+    background: rgba(251, 191, 36, 0.18);
+    color: #b45309;
+}
+
+/* ===== TODAY LESSON BLOCK ===== */
+
+[data-theme="sport"] .today-tasks {
+    background: #fffdf8;
+    border-radius: 26px;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.14);
+    padding: 14px 14px 16px;
+}
+
+[data-theme="sport"] .today-desc {
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+[data-theme="sport"] .today-task-item {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 18px;
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    box-shadow: 0 6px 14px rgba(15, 23, 42, 0.06);
+}
+
+/* ===== FOOTER ===== */
+
+[data-theme="sport"] .app-footer {
+    opacity: 0.8;
+}

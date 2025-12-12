@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="default">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hệ sinh thái học sinh – Học tập • Sức khỏe • Mối quan hệ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- CSS chung -->
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <!-- CSS theme (thay file này là đổi skin) -->
+    <link id="themeStylesheet" rel="stylesheet" href="assets/css/theme-default.css" />
+</head>
+
+<body class="app">
+
+    <!-- ========== APP SHELL ========== -->
+    <div class="app-shell">
+
+        <!-- HEADER -->
+        <header class="app-header">
+            <div class="app-brand">
+                <div class="app-logo">H³</div>
+                <div class="app-title">
+                    <h1>Hệ sinh thái H³</h1>
+                    <p>Học tập • Sức khỏe • Mối quan hệ</p>
+                </div>
+            </div>
+
+            <nav class="app-nav">
+                <button class="nav-item is-active" data-tab-target="tab-home">
+                    Home
+                </button>
+                <button class="nav-item" data-tab-target="tab-study">
+                    Học tập
+                </button>
+                <button class="nav-item" data-tab-target="tab-health">
+                    Sức khỏe
+                </button>
+                <button class="nav-item" data-tab-target="tab-relationships">
+                    Mối quan hệ
+                </button>
+            </nav>
+
+
+            <div class="app-actions">
+                <label class="theme-switcher">
+                    <span>Giao diện:</span>
+                    <select id="themeSelect">
+                        <option value="default">Mặc định</option>
+                        <option value="sport">Sport</option>
+                        <option value="space">Space</option>
+                        <option value="forest">Forest</option>
+                        <!-- sau này thêm gì thì thêm -->
+                    </select>
+                </label>
+                <label class="package-switcher">
+                    <span>Gói:</span>
+                    <select id="packageSelect">
+                        <option value="normal">Học bình thường (14 ngày)</option>
+                        <option value="exam">Ôn gấp – Speed-run (7 ngày)</option>
+                    </select>
+                </label>
+                <span class="badge badge-package" id="packageBadge">Học bình thường</span>
+                <button class="btn btn-ghost" id="btnLogin">Đăng nhập</button>
+            </div>
+        </header>
+
+        <!-- ========== MAIN CONTENT ========== -->
+        <main class="app-main">
+
+            <!-- ===== HUB 3.0: HOME ===== -->
+            <section id="tab-home" class="tab-panel is-active" aria-label="Home">
+                <header class="section-header">
+                    <h2>Hub 3.0 – Lớp của bạn hôm nay</h2>
+                    <p>Boss Rush • Focus Arena • Gratitude Chain</p>
+                </header>
+
+                <div class="home-grid">
+                    <!-- 3 thẻ game -->
+                    <section class="card card-home-games">
+                        <header class="card-header">
+                            <h3>Chọn “game” cho hôm nay</h3>
+                        </header>
+                        <div class="home-games">
+                            <button class="game-card" data-goto-tab="tab-study">
+                                <div class="game-card-title">Boss Rush</div>
+                                <p class="game-card-desc">3 nhiệm vụ học/ngày, map 14 ô, đánh boss cuối tuần.</p>
+                            </button>
+                            <button class="game-card" data-goto-tab="tab-health">
+                                <div class="game-card-title">Focus Arena</div>
+                                <p class="game-card-desc">Phiên tập trung 15–25–35’, hồi tim cho Boss Rush.</p>
+                            </button>
+                            <button class="game-card" data-goto-tab="tab-relationships">
+                                <div class="game-card-title">Gratitude Chain</div>
+                                <p class="game-card-desc">Thiệp số, nhiệm vụ kết nối, kéo dài chuỗi biết ơn.</p>
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- Daily Quest strip -->
+                    <section class="card card-daily-quest">
+                        <header class="card-header">
+                            <h3>Daily Quest hôm nay</h3>
+                        </header>
+                        <div id="dailyQuestStrip" class="daily-quest-strip">
+                            <!-- JS render -->
+                        </div>
+                        <p class="daily-quest-note">
+                            Làm đủ 3 quest (Học + Focus + 1 Thiệp) trong cùng 1 ngày để tăng Level lớp.
+                        </p>
+                    </section>
+
+                    <!-- Level lớp -->
+                    <section class="card card-class-level">
+                        <header class="card-header">
+                            <h3>Level lớp hôm nay</h3>
+                        </header>
+                        <div class="class-level-block">
+                            <div class="class-level-main">
+                                <span class="class-level-label">Class Level</span>
+                                <span class="class-level-value" id="classLevelValue">0</span>
+                                <span class="class-level-max">/10</span>
+                            </div>
+                            <div class="class-level-bar">
+                                <div class="class-level-bar-fill" id="classLevelBarFill"></div>
+                            </div>
+                            <p class="class-level-hint">
+                                Mỗi ngày đủ Coin (Học) + Orb (Focus) + Spark (Gratitude) → Level +1.
+                            </p>
+                        </div>
+                    </section>
+                </div>
+            </section>
+
+            <!-- ===== TRỤ 1: HỌC TẬP ===== -->
+            <section id="tab-study" class="tab-panel" aria-label="Học tập">
+                <header class="section-header">
+                    <h2>Học tập cá nhân hóa</h2>
+                    <p>Lộ trình – bài học – bài bù – Teach-Back 60s</p>
+                </header>
+
+                <div class="section-grid row">
+                    <!-- Roadmap -->
+                    <section class="card card-roadmap">
+                        <header class="card-header">
+                            <h3>Lộ trình học</h3>
+                            <button class="btn btn-small" id="btnImportCsv">
+                                Import file Chương – Bài
+                            </button>
+                            <input type="file" id="csvInput" accept=".csv" style="display: none;" />
+                            <button class="btn btn-outline btn-small" id="btnAutoSprint" data-package-only="exam">
+                                Tạo Sprint 7 ngày
+                            </button>
+                        </header>
+                        <div class="card-body" id="roadmapContainer">
+                            <!-- Sau này JS sẽ render các ngày/buổi học -->
+                            <p class="placeholder">
+                                Chưa có lộ trình. Hãy import file CSV để bắt đầu.
+                            </p>
+                        </div>
+                    </section>
+                    <!-- Today Lesson -->
+                    <div>
+                        <section class="card card-today">
+                            <header class="card-header">
+                                <h3>Bài học hôm nay</h3>
+                                <span class="badge" id="todayStatus">Chưa bắt đầu</span>
+                            </header>
+                            <div class="card-body" id="todayLessonContainer">
+                                <p class="placeholder">
+                                    Chưa có nhiệm vụ cho hôm nay. Hãy import file CSV để hệ thống gợi ý.
+                                </p>
+                                <button class="btn" id="btnCompleteToday" disabled>
+                                    Hoàn tất ngày học
+                                </button>
+                            </div>
+                        </section>
+
+                        <!-- Performance & Streak -->
+                        <section class="card card-performance mt-3">
+                            <header class="card-header">
+                                <h3>Tiến độ & điểm mạnh/yếu</h3>
+                            </header>
+                            <div class="card-body">
+                                <div class="stats-row">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Chuỗi ngày học</span>
+                                        <span class="stat-value" id="streakValue">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Điểm trung bình</span>
+                                        <span class="stat-value" id="avgScoreValue">-</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Bài bù còn lại</span>
+                                        <span class="stat-value" id="remedyCountValue">0</span>
+                                    </div>
+                                </div>
+                                <div id="skillHeatmap" class="skill-heatmap">
+                                    <!-- sau này render heatmap sub-skill -->
+                                    <p class="placeholder">
+                                        Biểu đồ kỹ năng sẽ hiển thị sau khi bạn làm vài bài test.
+                                    </p>
+                                </div>
+                                <!-- Boss Rush – Map 14 ngày -->
+                                <div class="study-bossrush-block mt-3">
+                                    <h4 class="sub-title">Boss Rush – Map 14 ngày</h4>
+
+                                    <!-- Lưới 14 ô -->
+                                    <div id="studyMapGrid" class="study-map-grid"></div>
+
+                                    <!-- Nút bắt đầu 3 nhiệm vụ -->
+                                    <button class="btn btn-outline btn-small mt-2" id="btnStartStudyMissions">
+                                        Làm 3 nhiệm vụ hôm nay
+                                    </button>
+
+                                    <!-- Khu nhiệm vụ (demo) -->
+                                    <div id="studyMissionArea" class="study-mission-area" style="display:none;">
+                                        <p class="placeholder">
+                                            (Demo) Khu 3 nhiệm vụ sẽ hiển thị ở đây. Tạm thời dùng nút dưới để giả lập
+                                            đã làm xong 3 nhiệm vụ.
+                                        </p>
+                                        <button class="btn btn-small" id="btnCompleteStudyDemo">
+                                            ✅ Hoàn tất 3 nhiệm vụ (demo)
+                                        </button>
+                                    </div>
+
+                                    <!-- Recap sau khi clear -->
+                                    <div id="studyRecapCard" class="study-recap-card mt-2" style="display:none;">
+                                        <div class="recap-main">
+                                            <span id="studyRecapTitle"></span>
+                                            <span class="recap-stars" id="studyRecapStars"></span>
+                                        </div>
+                                        <div class="recap-sub" id="studyRecapDetail"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Boss Rush – Tài nguyên & Shop -->
+                        <section class="card card-resources mt-3">
+                            <header class="card-header">
+                                <h3>Boss Rush – Tài nguyên</h3>
+                            </header>
+                            <div class="card-body">
+                                <div class="stats-row">
+                                    <div class="stat-item">
+                                        <span class="stat-label">SP</span>
+                                        <span class="stat-value" id="spValue">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Orb</span>
+                                        <span class="stat-value" id="orbValue">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Spark</span>
+                                        <span class="stat-value" id="sparkValue">0</span>
+                                    </div>
+                                </div>
+
+                                <hr class="divider" />
+
+                                <h4 class="sub-title">Shop – Kỹ năng</h4>
+                                <p class="text-muted small">
+                                    Dùng SP để nâng 3 chiêu Quick, FocusBurst, GratitudeShield (max level = 3).
+                                </p>
+
+                                <div id="shopMovesList" class="shop-moves-list">
+                                    <!-- render bằng JS -->
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Loadout -->
+                        <section class="card card-loadout mt-3">
+                            <header class="card-header">
+                                <h3>Loadout – Chọn skill mang vào Boss</h3>
+                            </header>
+                            <div class="card-body">
+                                <p class="text-muted small">
+                                    Chọn tối đa 3 chiêu để mang vào Boss Rush (v1: chưa bật rune).
+                                </p>
+                                <div id="loadoutMovesList" class="loadout-moves-list">
+                                    <!-- render bằng JS -->
+                                </div>
+                                <p class="text-muted small mt-2" id="loadoutHint"></p>
+                            </div>
+                        </section>
+
+                        <!-- Boss Arena -->
+                        <section class="card card-boss mt-3">
+                            <header class="card-header">
+                                <h3>Boss Arena – 1 trận/ngày</h3>
+                            </header>
+                            <div class="card-body">
+                                <!-- HP Boss -->
+                                <div class="boss-hp-block">
+                                    <div class="boss-hp-header">
+                                        <span>Boss tuần này</span>
+                                        <span id="bossWeekLabel" class="boss-week-label">Week 1</span>
+                                    </div>
+                                    <div class="boss-hp-bar">
+                                        <div id="bossHpBarFill" class="boss-hp-bar-fill"></div>
+                                    </div>
+                                    <div class="boss-hp-text">
+                                        HP: <span id="bossHpCurrent">0</span> / <span id="bossHpMax">0</span>
+                                    </div>
+                                </div>
+
+                                <hr class="divider" />
+
+                                <!-- Lượt đánh (demo 3 lượt tự động dựa trên loadout) -->
+                                <p class="text-muted small">
+                                    V1 demo: hệ thống sẽ dùng 3 chiêu trong loadout của bạn để tính damage 3 lượt,
+                                    áp dụng công thức Boss Damage v2 (Perfect, Orb, Chain, Anti-spam, AI phase).
+                                </p>
+
+                                <button class="btn" id="btnFightBoss">
+                                    🔥 Đánh Boss 3 lượt (demo)
+                                </button>
+
+                                <!-- Battle log -->
+                                <div id="bossBattleLog" class="boss-battle-log mt-3">
+                                    <p class="placeholder">
+                                        Chưa có trận nào. Hãy bấm "Đánh Boss" để xem log.
+                                    </p>
+                                </div>
+
+                                <!-- Top-5 Damage -->
+                                <div class="boss-hof mt-3">
+                                    <h4 class="sub-title">Top-5 damage hôm nay</h4>
+                                    <ol id="bossHofList" class="boss-hof-list">
+                                        <!-- render bằng JS -->
+                                    </ol>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Teach-Back -->
+                        <section class="card card-teachback mt-3">
+                            <header class="card-header">
+                                <h3>Teach-Back 60s</h3>
+                            </header>
+                            <div class="card-body">
+                                <p>Hãy thử dạy lại nội dung vừa học trong 60 giây.</p>
+                                <div class="teachback-controls">
+                                    <button class="btn btn-outline" id="btnRecordTeachback">
+                                        Ghi âm / Ghi hình 60s
+                                    </button>
+                                    <span class="teachback-status" id="teachbackStatus">Chưa ghi</span>
+                                </div>
+                                <div id="teachbackList" class="teachback-list">
+                                    <!-- Danh sách clip Teach-Back gần đây -->
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== TRỤ 2: SỨC KHỎE ===== -->
+            <section id="tab-health" class="tab-panel" aria-label="Sức khỏe">
+                <header class="section-header">
+                    <h2>Sức khỏe tinh thần – thể chất – SJL</h2>
+                    <p>Check-in cảm xúc, Focus Mode, thư viện wellbeing</p>
+                </header>
+
+                <div class="section-grid">
+                    <!-- Mood Check-in -->
+                    <section class="card card-mood">
+                        <header class="card-header">
+                            <h3>Hôm nay bạn thấy thế nào?</h3>
+                        </header>
+                        <div class="card-body">
+                            <div class="mood-picker" id="moodPicker">
+                                <!-- JS sẽ gắn emoji/mức độ -->
+                            </div>
+                            <button class="btn" id="btnSubmitMood">Gợi ý cho hôm nay</button>
+                            <div class="mood-suggestion" id="moodSuggestion">
+                                <!-- Gợi ý focus / nghỉ / wellbeing -->
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Focus Mode -->
+                    <section class="card card-focus">
+                        <header class="card-header">
+                            <h3>Phiên tập trung (Focus Mode)</h3>
+                        </header>
+                        <div class="card-body">
+                            <div class="focus-config">
+                                <label>
+                                    Thời lượng (phút):
+                                    <input type="number" id="focusDuration" min="10" max="60" value="25" />
+                                </label>
+                            </div>
+                            <div class="focus-timer" id="focusTimerDisplay">
+                                25:00
+                            </div>
+                            <div class="focus-controls">
+                                <button class="btn" id="btnStartFocus">Bắt đầu</button>
+                                <button class="btn btn-ghost" id="btnStopFocus">Dừng</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="card" data-package-only="normal">
+                        <header class="card-header">
+                            <h3>Routine 14 ngày</h3>
+                        </header>
+                        <div class="card-body">
+                            <p class="placeholder">Checklist ngủ đúng giờ, vận động nhẹ, ăn lành mạnh.</p>
+                        </div>
+                    </section>
+
+                    <section class="card" data-package-only="exam">
+                        <header class="card-header">
+                            <h3>Anti-burnout 5 phút</h3>
+                        </header>
+                        <div class="card-body">
+                            <p class="placeholder">Thở 1 phút • Giãn cơ 2 phút • Reset kế hoạch 2 phút.</p>
+                        </div>
+                    </section>
+
+                    <!-- Wellbeing Video Series -->
+                    <section class="card card-series">
+                        <header class="card-header">
+                            <h3>Series video hướng dẫn</h3>
+                        </header>
+                        <div class="card-body">
+                            <p class="placeholder">
+                                Xem lại các series video về Focus Mode, Wellbeing, thói quen học tập...
+                            </p>
+                            <button class="btn" id="btnOpenSeries">
+                                Mở thư viện video
+                            </button>
+                        </div>
+                    </section>
+
+                </div>
+            </section>
+
+            <!-- ===== TRỤ 3: MỐI QUAN HỆ ===== -->
+            <section id="tab-relationships" class="tab-panel" aria-label="Mối quan hệ">
+                <header class="section-header">
+                    <h2>Mối quan hệ & lòng biết ơn</h2>
+                    <p>Thiệp số – kỷ niệm – nhiệm vụ tử tế</p>
+                </header>
+
+                <div class="section-grid">
+                    <!-- Create Gift -->
+                    <section class="card card-gift">
+                        <header class="card-header">
+                            <h3>Tạo quà tặng kỹ thuật số</h3>
+                        </header>
+                        <div class="card-body">
+                            <form id="giftForm" class="gift-form">
+                                <label>
+                                    Người nhận
+                                    <input type="text" id="giftRecipient" placeholder="Bạn bè / Thầy cô / Gia đình" />
+                                </label>
+                                <label>
+                                    Dịp
+                                    <input type="text" id="giftOccasion" placeholder="Sinh nhật, 20/11, cảm ơn..." />
+                                </label>
+                                <label>
+                                    Lời nhắn
+                                    <textarea id="giftMessage" rows="3"
+                                        placeholder="Viết vài dòng từ trái tim..."></textarea>
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" id="giftConsent" />
+                                    Tôi xác nhận có quyền sử dụng hình ảnh/clip mình tải lên
+                                </label>
+                                <button class="btn" type="submit">Tạo thiệp số</button>
+                            </form>
+                            <div id="giftPreview" class="gift-preview">
+                                <!-- sau này render preview poster/video -->
+                            </div>
+                        </div>
+
+                        <!-- Gratitude Notes -->
+                        <section class="card card-gratitude">
+                            <header class="card-header">
+                                <h3>Gratitude Notes</h3>
+                            </header>
+                            <div class="card-body" id="gratitudeList">
+                                <!-- JS render template lời cảm ơn mẫu -->
+                                <p class="placeholder">
+                                    Chọn 1 mẫu lời cảm ơn và tuỳ chỉnh theo ý bạn.
+                                </p>
+                            </div>
+                        </section>
+                    </section>
+
+                    <!-- Kindness Missions -->
+                    <section class="card card-missions">
+                        <header class="card-header">
+                            <h3>Nhiệm vụ kết nối (Kindness Missions)</h3>
+                        </header>
+                        <div class="card-body" id="missionsList">
+                            <!-- 10 nhiệm vụ kết nối, tick => hiện badge -->
+                        </div>
+
+                        <!-- Social Summary -->
+                        <section class="card card-social-summary">
+                            <header class="card-header">
+                                <h3>Tổng quan kết nối</h3>
+                            </header>
+                            <div class="card-body">
+                                <ul class="summary-list" id="relationshipSummary">
+                                    <!-- vd: số thiệp đã gửi, nhiệm vụ đã hoàn thành -->
+                                </ul>
+                            </div>
+                        </section>
+
+                        <!-- LWI Index -->
+                        <section class="card card-lwi">
+                            <header class="card-header">
+                                <h3>Chỉ số Học tập & Wellbeing (LWI)</h3>
+                            </header>
+                            <div class="card-body">
+                                <div class="lwi-score" id="lwiScore">–</div>
+                                <p class="lwi-desc">
+                                    LWI kết hợp: % hoàn thành, điểm tiến bộ, bài bù, giờ giấc.
+                                </p>
+                                <div id="lwiHistory" class="lwi-history">
+                                    <!-- biểu đồ nhỏ hoặc list -->
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+
+                    <section class="card" data-package-only="exam">
+                        <header class="card-header">
+                            <h3>Support Circle khi thi</h3>
+                        </header>
+                        <div class="card-body">
+                            <div class="placeholder">
+                                Gợi ý 3 hành động: hỏi thăm • nhắc lịch • gửi thiệp động viên.
+                            </div>
+                        </div>
+                    </section>
+
+
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="app-footer">
+            <p>H³ – Nền tảng hỗ trợ toàn diện cho học sinh THPT</p>
+        </footer>
+    </div>
+
+    <!-- POPUP: Series video -->
+    <div id="seriesModal" class="series-modal is-hidden" aria-hidden="true">
+        <!-- Lớp nền để nhận click đóng -->
+        <div class="series-modal-backdrop"></div>
+
+        <!-- Hộp nội dung popup -->
+        <div class="series-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="seriesModalTitle">
+            <header class="series-modal-header">
+                <h3 id="seriesModalTitle">Thư viện video H³</h3>
+                <button class="series-modal-close" id="btnCloseSeries" aria-label="Đóng">
+                    ✕
+                </button>
+            </header>
+
+            <!-- Hàng tab series (scroll ngang) -->
+            <div class="series-tabs-wrapper">
+                <button class="series-tab is-active" data-series-id="insideyoursleep">
+                    Inside Your Sleep
+                </button>
+                <button class="series-tab" data-series-id="mydailyenergy">
+                    My Daily Energy
+                </button>
+                <button class="series-tab" data-series-id="whenilistentomyself">
+                    When I Listen to Myself
+                </button>
+                <button class="series-tab" data-series-id="easeyourday">
+                    Ease Your Day
+                </button>
+                <button class="series-tab" data-series-id="20dayshealthyeating">
+                    20 Days Healthy Eating
+                </button>
+                <button class="series-tab" data-series-id="strongereveryday">
+                    Stronger Every Day
+                </button>
+            </div>
+
+            <!-- Nội dung video theo từng series -->
+            <div class="series-panels">
+
+                <!-- Series: Inside Your Sleep -->
+                <div class="series-panel is-active" data-series-id="insideyoursleep">
+                    <div class="series-video-grid">
+                        <!-- Video card -->
+                        <a class="video-card" href="https://www.youtube.com/shorts/SHORT_ID_1" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/VIDEO_ID_1/hqdefault.jpg" alt="Inside Your Sleep - Tập 1">
+                            <div class="video-caption">Inside Your Sleep · Tập 1</div>
+                        </a>
+
+                        <a class="video-card" href="https://www.youtube.com/shorts/SHORT_ID_2" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/VIDEO_ID_2/hqdefault.jpg" alt="Inside Your Sleep - Tập 2">
+                            <div class="video-caption">Inside Your Sleep · Tập 2</div>
+                        </a>
+
+                        <a class="video-card" href="https://www.youtube.com/shorts/SHORT_ID_3" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/VIDEO_ID_3/hqdefault.jpg" alt="Inside Your Sleep - Tập 3">
+                            <div class="video-caption">Inside Your Sleep · Tập 3</div>
+                        </a>
+
+                        <a class="video-card" href="https://www.youtube.com/shorts/SHORT_ID_4" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/VIDEO_ID_4/hqdefault.jpg" alt="Inside Your Sleep - Tập 4">
+                            <div class="video-caption">Inside Your Sleep · Tập 4</div>
+                        </a>
+
+                        <!-- Thêm tiếp... mỗi 4 cái sẽ tự xuống hàng -->
+                    </div>
+                </div>
+
+                <!-- Series: My Daily Energy -->
+                <div class="series-panel" data-series-id="mydailyenergy">
+                    <div class="series-video-grid">
+                        <a class="video-card" href="https://www.youtube.com/shorts/SHORT_ID_1" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/VIDEO_ID_1/hqdefault.jpg" alt="My Daily Energy - Tập 1">
+                            <div class="video-caption">My Daily Energy · Tập 1</div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Series: When I Listen to Myself -->
+                <div class="series-panel" data-series-id="whenilistentomyself">
+                    <div class="series-video-grid">
+                        <a class="video-card" href="https://www.youtube.com/shorts/SHORT_ID_1" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/VIDEO_ID_1/hqdefault.jpg"
+                                alt="When I Listen to Myself - Tập 1">
+                            <div class="video-caption">When I Listen to Myself · Tập 1</div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Series: Ease Your Day -->
+                <div class="series-panel" data-series-id="easeyourday">
+                    <div class="series-video-grid">
+                        <!-- add cards -->
+                    </div>
+                </div>
+
+                <!-- Series: 20 Days Healthy Eating -->
+                <div class="series-panel" data-series-id="20dayshealthyeating">
+                    <div class="series-video-grid">
+                        <!-- add cards -->
+                    </div>
+                </div>
+
+                <!-- Series: Stronger Every Day -->
+                <div class="series-panel" data-series-id="strongereveryday">
+                    <div class="series-video-grid">
+                        <!-- add cards -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JS chính -->
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
