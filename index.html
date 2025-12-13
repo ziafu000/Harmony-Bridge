@@ -561,82 +561,117 @@
 
     <!-- POPUP: Series video -->
     <div id="seriesModal" class="series-modal is-hidden" aria-hidden="true">
-        <!-- Lớp nền để nhận click đóng -->
         <div class="series-modal-backdrop"></div>
 
-        <!-- Hộp nội dung popup -->
         <div class="series-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="seriesModalTitle">
             <header class="series-modal-header">
                 <h3 id="seriesModalTitle">Thư viện video H³</h3>
-                <button class="series-modal-close" id="btnCloseSeries" aria-label="Đóng">
-                    ✕
-                </button>
+                <button class="series-modal-close" id="btnCloseSeries" aria-label="Đóng">✕</button>
             </header>
 
             <!-- Hàng tab series (scroll ngang) -->
             <div class="series-tabs-wrapper">
-                <button class="series-tab is-active" data-series-id="insideyoursleep">
-                    Inside Your Sleep
-                </button>
-                <button class="series-tab" data-series-id="mydailyenergy">
-                    My Daily Energy
-                </button>
-                <button class="series-tab" data-series-id="whenilistentomyself">
-                    When I Listen to Myself
-                </button>
-                <button class="series-tab" data-series-id="easeyourday">
-                    Ease Your Day
-                </button>
-                <button class="series-tab" data-series-id="20dayshealthyeating">
-                    20 Days Healthy Eating
-                </button>
-                <button class="series-tab" data-series-id="strongereveryday">
-                    Stronger Every Day
-                </button>
+                <button class="series-tab is-active" data-series-id="insideyoursleep">Inside Your Sleep</button>
+                <button class="series-tab" data-series-id="mydailyenergy">My Daily Energy</button>
+                <button class="series-tab" data-series-id="whenilistentomyself">When I Listen to Myself</button>
+                <button class="series-tab" data-series-id="easeyourday">Ease Your Day</button>
+                <button class="series-tab" data-series-id="20dayshealthyeating">20 Days Healthy Eating</button>
+                <button class="series-tab" data-series-id="strongereveryday">Stronger Every Day</button>
             </div>
 
-            <!-- Nội dung video theo từng series -->
+            <!-- ✅ Bọc tất cả panel vào đây để UI không bị chồng -->
             <div class="series-panels">
 
                 <!-- Series: Inside Your Sleep -->
                 <div class="series-panel is-active" data-series-id="insideyoursleep">
                     <div class="series-video-grid">
-                        <!-- Video card -->
-                        <a class="video-card" href="https://www.youtube.com/shorts/SHORT_ID_1" target="_blank"
+                        <a class="video-card" href="https://youtube.com/shorts/OBC7PHH7TzQ" target="_blank"
                             rel="noopener">
-                            <img src="https://i.ytimg.com/vi/VIDEO_ID_1/hqdefault.jpg" alt="Inside Your Sleep - Tập 1">
-                            <div class="video-caption">Inside Your Sleep · Tập 1</div>
+                            <img src="https://i.ytimg.com/vi/OBC7PHH7TzQ/hqdefault.jpg" alt="Inside Your Sleep - Tập 1">
+                            <div class="video-caption">Tập 1 😴 Bạn có bao giờ nhắm mắt một chút mà thời gian đã trôi
+                                qua?</div>
                         </a>
 
-                        <a class="video-card" href="https://www.youtube.com/shorts/SHORT_ID_2" target="_blank"
+                        <a class="video-card" href="https://youtube.com/shorts/Iu6ZdtUI2Ho" target="_blank"
                             rel="noopener">
-                            <img src="https://i.ytimg.com/vi/VIDEO_ID_2/hqdefault.jpg" alt="Inside Your Sleep - Tập 2">
-                            <div class="video-caption">Inside Your Sleep · Tập 2</div>
+                            <img src="https://i.ytimg.com/vi/Iu6ZdtUI2Ho/hqdefault.jpg" alt="Inside Your Sleep - Tập 2">
+                            <div class="video-caption">Tập 2 🌌 Vì sao bạn tỉnh dậy giữa đêm… mà không biết lý do?</div>
                         </a>
 
-                        <a class="video-card" href="https://www.youtube.com/shorts/SHORT_ID_3" target="_blank"
+                        <a class="video-card" href="https://youtube.com/shorts/kAi4dXl7CGc" target="_blank"
                             rel="noopener">
-                            <img src="https://i.ytimg.com/vi/VIDEO_ID_3/hqdefault.jpg" alt="Inside Your Sleep - Tập 3">
-                            <div class="video-caption">Inside Your Sleep · Tập 3</div>
+                            <img src="https://i.ytimg.com/vi/kAi4dXl7CGc/hqdefault.jpg" alt="Inside Your Sleep - Tập 3">
+                            <div class="video-caption">Tập 3⏳ Giấc ngủ của bạn luôn xoay quanh chu kỳ 90 phút</div>
                         </a>
 
-                        <a class="video-card" href="https://www.youtube.com/shorts/SHORT_ID_4" target="_blank"
+                        <a class="video-card" href="https://youtube.com/shorts/cZXA9IYk8dA" target="_blank"
                             rel="noopener">
-                            <img src="https://i.ytimg.com/vi/VIDEO_ID_4/hqdefault.jpg" alt="Inside Your Sleep - Tập 4">
-                            <div class="video-caption">Inside Your Sleep · Tập 4</div>
+                            <img src="https://i.ytimg.com/vi/cZXA9IYk8dA/hqdefault.jpg" alt="Inside Your Sleep - Tập 4">
+                            <div class="video-caption">Tập 4🔊 Chỉ một tiếng động rất nhỏ cũng có thể phá vỡ giấc ngủ
+                                của bạn</div>
                         </a>
 
-                        <!-- Thêm tiếp... mỗi 4 cái sẽ tự xuống hàng -->
+                        <a class="video-card" href="https://youtube.com/shorts/IU4OIu_WXH4" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/IU4OIu_WXH4/hqdefault.jpg" alt="Inside Your Sleep - Tập 5">
+                            <div class="video-caption">Tập 5 🧠✨ Có lúc bạn đang ngủ… nhưng não lại hoạt động như lúc
+                                thức</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/6aA4e32LzZc" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/6aA4e32LzZc/hqdefault.jpg" alt="Inside Your Sleep - Tập 6">
+                            <div class="video-caption">Tập 6 ❄️🛌 Trước khi ngủ, cơ thể bạn đang âm thầm hạ nhiệt độ lõi
+                            </div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/9_IlqCHulZs" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/9_IlqCHulZs/hqdefault.jpg" alt="Inside Your Sleep - Tập 7">
+                            <div class="video-caption">Tập 7 😨🌙 Bóng đè Khi bạn tỉnh… nhưng cơ thể thì không</div>
+                        </a>
                     </div>
                 </div>
 
                 <!-- Series: My Daily Energy -->
                 <div class="series-panel" data-series-id="mydailyenergy">
                     <div class="series-video-grid">
-                        <a class="video-card" href="https://www.youtube.com/shorts/SHORT_ID_1" target="_blank"
+                        <a class="video-card" href="https://youtube.com/shorts/QD09-172c4M" target="_blank"
                             rel="noopener">
-                            <img src="https://i.ytimg.com/vi/VIDEO_ID_1/hqdefault.jpg" alt="My Daily Energy - Tập 1">
-                            <div class="video-caption">My Daily Energy · Tập 1</div>
+                            <img src="https://i.ytimg.com/vi/QD09-172c4M/hqdefault.jpg" alt="My Daily Energy - Tập 1">
+                            <div class="video-caption">Tập 1: ☀️Năng lượng cơ bản bạn cần để bắt đầu một ngày mới</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/NNVzUNbgOVc" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/NNVzUNbgOVc/hqdefault.jpg" alt="My Daily Energy - Tập 2">
+                            <div class="video-caption"> Tập 2: 💛Năng lượng cảm xúc đến từ đâu</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/rErDOf6KYrY" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/rErDOf6KYrY/hqdefault.jpg" alt="My Daily Energy - Tập 3">
+                            <div class="video-caption">Tập 3 🔋👥 Pin xã hội Vì sao nói chuyện cũng khiến bạn mệt?</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/pUX8eOow91E" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/pUX8eOow91E/hqdefault.jpg" alt="My Daily Energy - Tập 4">
+                            <div class="video-caption">Tập 4 🧠⚡Năng lượng tinh thần & lý do overthinking xuất hiện
+                            </div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/EDPo6Wtq7YU" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/EDPo6Wtq7YU/hqdefault.jpg" alt="My Daily Energy - Tập 5">
+                            <div class="video-caption">Tập 5 📚✨ Năng lượng học tập Vì sao có lúc bạn học rất nhanh?
+                            </div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/dip3Iux9Psw" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/dip3Iux9Psw/hqdefault.jpg" alt="My Daily Energy - Tập 6">
+                            <div class="video-caption">Tập 6🔌😮‍💨 Vì sao pin xã hội của bạn bị rút</div>
                         </a>
                     </div>
                 </div>
@@ -644,40 +679,200 @@
                 <!-- Series: When I Listen to Myself -->
                 <div class="series-panel" data-series-id="whenilistentomyself">
                     <div class="series-video-grid">
-                        <a class="video-card" href="https://www.youtube.com/shorts/SHORT_ID_1" target="_blank"
+                        <a class="video-card" href="https://youtube.com/shorts/HraWBw_BkS8" target="_blank"
                             rel="noopener">
-                            <img src="https://i.ytimg.com/vi/VIDEO_ID_1/hqdefault.jpg"
+                            <img src="https://i.ytimg.com/vi/HraWBw_BkS8/hqdefault.jpg"
                                 alt="When I Listen to Myself - Tập 1">
-                            <div class="video-caption">When I Listen to Myself · Tập 1</div>
+                            <div class="video-caption">Tập 1😮‍💨 Khi bạn bắt đầu căng thẳng và stress</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/Y0lJMm4DlLs" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/Y0lJMm4DlLs/hqdefault.jpg"
+                                alt="When I Listen to Myself - Tập 2">
+                            <div class="video-caption">Tập 2 💭 Lo lắng nhẹ không xấu — cảm xúc chỉ là tín hiệu"</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/vFVnIIBjhFc" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/vFVnIIBjhFc/hqdefault.jpg"
+                                alt="When I Listen to Myself - Tập 3">
+                            <div class="video-caption">Tập 3 🫂 Tự trấn an Cách giúp cơ thể vượt qua</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/OtUQyuwmECs" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/OtUQyuwmECs/hqdefault.jpg"
+                                alt="When I Listen to Myself - Tập 5">
+                            <div class="video-caption">Tập 5 💚 Lắng nghe cơ thể Nó luôn nói trước tâm trí</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/-f6ssk-6be4" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/-f6ssk-6be4/hqdefault.jpg"
+                                alt="When I Listen to Myself - Tập 6">
+                            <div class="video-caption">ập 6💭 Khi tâm trí chạy quá nhanh để theo kịp</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/Ke5_VdMQNvY" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/Ke5_VdMQNvY/hqdefault.jpg"
+                                alt="When I Listen to Myself - Tập 7">
+                            <div class="video-caption">Tập 7 🌧️🧠 Khi suy nghĩ tiêu cực và nỗi lo kéo đến</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/UGL4Fpkoicg" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/UGL4Fpkoicg/hqdefault.jpg"
+                                alt="When I Listen to Myself - Tập 8">
+                            <div class="video-caption">Tập 8 💭 Khi tôi lắng nghe chính mình</div>
                         </a>
                     </div>
                 </div>
 
-                <!-- Series: Ease Your Day -->
                 <div class="series-panel" data-series-id="easeyourday">
                     <div class="series-video-grid">
-                        <!-- add cards -->
+                        <a class="video-card" href="https://youtube.com/shorts/XQXJG8Yi7WE" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/XQXJG8Yi7WE/hqdefault.jpg" alt="Ease Your Day - Tập 1">
+                            <div class="video-caption">Tập 1 🌅 Cách reset lại năng lượng vào buổi sáng</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/sxAgjjn--wY" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/sxAgjjn--wY/hqdefault.jpg" alt="Ease Your Day - Tập 3">
+                            <div class="video-caption">Tập 3 🔄🧘 Mind Reset: Đặt lại tâm trí giữa một ngày bận rộn
+                            </div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/E8xsWT-fbuM" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/E8xsWT-fbuM/hqdefault.jpg" alt="Ease Your Day - Tập 4">
+                            <div class="video-caption">Tập 4 🧩🌿 Những hành động nhỏ giúp tâm trí bớt bận rộn</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/uYgmwhleKu8" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/uYgmwhleKu8/hqdefault.jpg" alt="Ease Your Day - Tập 5">
+                            <div class="video-caption">Tập 5✨🌼 Những điều nhỏ nhặt đang giữ bạn lại với hiện tại</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/VUa_7M2OH8E" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/VUa_7M2OH8E/hqdefault.jpg" alt="Ease Your Day - Tập 6">
+                            <div class="video-caption">Tập 6 🚶‍♂️☀️ Bắt đầu ngày mới bằng một việc thật nhỏ</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/AdJo_kU5aqU" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/AdJo_kU5aqU/hqdefault.jpg" alt="Ease Your Day - Tập 7">
+                            <div class="video-caption">Tập 7 🐢🧠 Khi tâm trí chậm lại… mọi thứ trở nên rõ hơn</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/olTVqHD34mA" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/olTVqHD34mA/hqdefault.jpg" alt="Ease Your Day - Tập 8">
+                            <div class="video-caption">Tập 8 🫶🌿 Một hành động nhỏ giúp tâm trí ổn định hơn</div>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Series: 20 Days Healthy Eating -->
                 <div class="series-panel" data-series-id="20dayshealthyeating">
                     <div class="series-video-grid">
-                        <!-- add cards -->
+                        <a class="video-card" href="https://youtube.com/shorts/5WTszqj9pig" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/5WTszqj9pig/hqdefault.jpg"
+                                alt="Tập 1🥣⏱️ “1 PHÚT LÀ XONG”">
+                            <div class="video-caption">Tập 1🥣⏱️ “1 PHÚT LÀ XONG”</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/v-vl87pMrEU" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/v-vl87pMrEU/hqdefault.jpg" alt="Tập 2 🥬💧 “DETOX DAY”">
+                            <div class="video-caption">Tập 2 🥬💧 “DETOX DAY”</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/n_BGsh70-xg" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/n_BGsh70-xg/hqdefault.jpg"
+                                alt="Tập 3 🔥🍗 “JUICY NOT DRY”">
+                            <div class="video-caption">Tập 3 🔥🍗 “JUICY NOT DRY”</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/LltWXojH4uI" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/LltWXojH4uI/hqdefault.jpg" alt="Tập 4 🥙💪 “Giàu đạm”">
+                            <div class="video-caption">Tập 4 🥙💪 “Giàu đạm”</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/kr0mpm7XYp4" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/kr0mpm7XYp4/hqdefault.jpg" alt="Tập 5 🍳 “chất béo tốt”">
+                            <div class="video-caption">Tập 5 🍳 “chất béo tốt”</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/GShlJVT8fB0" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/GShlJVT8fB0/hqdefault.jpg"
+                                alt="Tập 6 🥞✨Pancake healthy mềm xốp không tội lỗi">
+                            <div class="video-caption">Tập 6 🥞✨Pancake healthy mềm xốp không tội lỗi</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/VBW2_vpTIws" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/VBW2_vpTIws/hqdefault.jpg"
+                                alt="Tập 7 🍎🌰Ăn snack kiểu này không lo tăng cân">
+                            <div class="video-caption">Tập 7 🍎🌰Ăn snack kiểu này không lo tăng cân</div>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Series: Stronger Every Day -->
                 <div class="series-panel" data-series-id="strongereveryday">
                     <div class="series-video-grid">
-                        <!-- add cards -->
+                        <a class="video-card" href="https://youtube.com/shorts/8CHi_DPPDpI" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/8CHi_DPPDpI/hqdefault.jpg"
+                                alt="Tập 1 Chống đẩy đúng cách để ngực phát triển thật sự 👉 💪">
+                            <div class="video-caption">Tập 1 Chống đẩy đúng cách để ngực phát triển thật sự 👉 💪</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/VP8vIZgIDak" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/VP8vIZgIDak/hqdefault.jpg" alt="Tập 2 Squat đúng cách 🔥">
+                            <div class="video-caption">Tập 2 Squat đúng cách 🔥</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/GdWnUZV9DS0" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/GdWnUZV9DS0/hqdefault.jpg"
+                                alt="Tập 3 Công thức tập vai để vai tròn và rộng hơn 👉 🟡">
+                            <div class="video-caption">Tập 3 Công thức tập vai để vai tròn và rộng hơn 👉 🟡</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/ulTfB3IJ7B4" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/ulTfB3IJ7B4/hqdefault.jpg" alt="Tập 4 Bài cardio 4 phút đốt mỡ cực nhanh 👉 ⏱️🔥">
+                            <div class="video-caption">Tập 4 Bài cardio 4 phút đốt mỡ cực nhanh 👉 ⏱️🔥</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/mt5NyfTyvfo" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/mt5NyfTyvfo/hqdefault.jpg" alt="Tập 5 Cardio nhảy nhưng vẫn đốt mỡ thật sự 👉 💃🔥">
+                            <div class="video-caption">Tập 5 Cardio nhảy nhưng vẫn đốt mỡ thật sự 👉 💃🔥</div>
+                        </a>
+
+                        <a class="video-card" href="https://youtube.com/shorts/Ag34h6ieRos" target="_blank"
+                            rel="noopener">
+                            <img src="https://i.ytimg.com/vi/Ag34h6ieRos/hqdefault.jpg"
+                                alt="Tập 6 Cardio nhẹ cho người mới – không đau khớp 👉 🌿">
+                            <div class="video-caption">Tập 6 Cardio nhẹ cho người mới – không đau khớp 👉 🌿</div>
+                        </a>
                     </div>
                 </div>
 
             </div>
         </div>
     </div>
-
 
     <!-- JS chính -->
     <script src="assets/js/app.js"></script>
