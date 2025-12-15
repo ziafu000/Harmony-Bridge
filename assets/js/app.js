@@ -12,6 +12,9 @@ const BOSS_STATE_KEY = "h3_boss_state_v1";
 const TODAY_LESSON_STATE_KEY = "h3_today_lesson_v1"; // trạng thái checkbox bài học theo ngày
 const TEACHBACK_DB_NAME = "h3_teachback_db_v1";
 const TEACHBACK_DB_STORE = "clips";
+const SHEET_SYNC_URL = "https://script.google.com/macros/s/AKfycbwg4J3QiG_q2q9o0MYdxe6o7jrT9Vb1eh7cPnYiScenZJj8C3_JRTMWRZPnGiO6pGOhEw/exec";
+const SHEET_SYNC_API_KEY = "H3KEY";
+const SYNC_QUEUE_KEY = "h3_sync_queue_1707200909012009";
 
 const App = {
     focusTimerId: null,
@@ -24,6 +27,7 @@ const App = {
     bossState: null,
     bossHallOfFame: [],
     currentStudyDayKey: null,   // 👈 NEW: ô đang được highlight trên map
+    syncTimer: null,
 
     init() {
         this.initTabs();
@@ -44,6 +48,7 @@ const App = {
         this.initTeachback();
         this.initStudyGame();          // 👈 thêm (sau bindEvents để DOM có sẵn)
         this.initSeriesPopup();
+        window.addEventListener("online", () => this.flushSyncQueue());
     },
 
     /* ========== TABS ========== */
@@ -152,6 +157,8 @@ const App = {
         if (!this.userState) return;
         try {
             localStorage.setItem(USER_STATE_KEY, JSON.stringify(this.userState));
+            this.enqueueSyncEvent(USER_STATE_KEY, this.userState);
+            this.flushSyncQueueDebounced();
         } catch (err) {
             console.error("Lỗi save user state:", err);
         }
@@ -191,6 +198,11 @@ const App = {
         if (!this.bossState) return;
         try {
             localStorage.setItem(BOSS_STATE_KEY, JSON.stringify(this.bossState));
+
+            // 🔁 SYNC
+            this.enqueueSyncEvent(BOSS_STATE_KEY, this.bossState);
+            this.flushSyncQueueDebounced();
+
         } catch (err) {
             console.error("Lỗi save boss state:", err);
         }
@@ -212,7 +224,13 @@ const App = {
 
     saveBossHallOfFame() {
         try {
-            localStorage.setItem(BOSS_HOF_KEY, JSON.stringify(this.bossHallOfFame || []));
+            const data = this.bossHallOfFame || [];
+            localStorage.setItem(BOSS_HOF_KEY, JSON.stringify(data));
+
+            // 🔁 SYNC
+            this.enqueueSyncEvent(BOSS_HOF_KEY, data);
+            this.flushSyncQueueDebounced();
+
         } catch (err) {
             console.error("Lỗi save boss HOF:", err);
         }
@@ -807,6 +825,11 @@ const App = {
         if (!this.dailyQuest) return;
         try {
             localStorage.setItem(DAILY_QUEST_KEY, JSON.stringify(this.dailyQuest));
+
+            // 🔁 SYNC
+            this.enqueueSyncEvent(DAILY_QUEST_KEY, this.dailyQuest);
+            this.flushSyncQueueDebounced();
+
         } catch (err) {
             console.error("Lỗi save daily quest:", err);
         }
@@ -884,13 +907,17 @@ const App = {
 
     saveClassLevel() {
         try {
-            localStorage.setItem(
-                CLASS_LEVEL_KEY,
-                JSON.stringify({
-                    level: this.classLevel || 0,
-                    lastLevelUpDate: this.lastLevelUpDate || null,
-                })
-            );
+            const payload = {
+                level: this.classLevel || 0,
+                lastLevelUpDate: this.lastLevelUpDate || null,
+            };
+
+            localStorage.setItem(CLASS_LEVEL_KEY, JSON.stringify(payload));
+
+            // 🔁 SYNC
+            this.enqueueSyncEvent(CLASS_LEVEL_KEY, payload);
+            this.flushSyncQueueDebounced();
+
         } catch (err) {
             console.error("Lỗi save class level:", err);
         }
@@ -974,12 +1001,15 @@ const App = {
                 RELATIONSHIP_PROGRESS_KEY,
                 JSON.stringify(progress)
             );
+
+            // 🔁 SYNC
+            this.enqueueSyncEvent(RELATIONSHIP_PROGRESS_KEY, progress);
+            this.flushSyncQueueDebounced();
+
         } catch (err) {
             console.error("Lỗi save relationship progress:", err);
         }
     },
-
-
     /* ========== LƯU / LOAD LỘ TRÌNH TỪ LOCALSTORAGE ========== */
     /* ========== LƯU / LOAD TIẾN ĐỘ HỌC TẬP (STREAK) ========== */
 
@@ -1001,6 +1031,11 @@ const App = {
     saveStudyProgress(progress) {
         try {
             localStorage.setItem(STUDY_PROGRESS_KEY, JSON.stringify(progress));
+
+            // 🔁 SYNC
+            this.enqueueSyncEvent(STUDY_PROGRESS_KEY, progress);
+            this.flushSyncQueueDebounced();
+
         } catch (err) {
             console.error("Lỗi save study progress:", err);
         }
@@ -1051,6 +1086,11 @@ const App = {
                 TODAY_LESSON_STATE_KEY,
                 JSON.stringify(state || {})
             );
+
+            // 🔁 SYNC
+            this.enqueueSyncEvent(TODAY_LESSON_STATE_KEY, state || {});
+            this.flushSyncQueueDebounced();
+
         } catch (err) {
             console.error("Lỗi save today lesson state:", err);
         }
@@ -1356,16 +1396,25 @@ const App = {
     saveRoadmapToStorage() {
         try {
             if (this.roadmapData && this.roadmapData.length > 0) {
-                localStorage.setItem(
-                    ROADMAP_STORAGE_KEY,
-                    JSON.stringify(this.roadmapData.map(({ statusKey, statusLabel, ...rest }) => rest))
+                const data = this.roadmapData.map(
+                    ({ statusKey, statusLabel, ...rest }) => rest
                 );
+
+                localStorage.setItem(ROADMAP_STORAGE_KEY, JSON.stringify(data));
+
+                // 🔁 SYNC
+                this.enqueueSyncEvent(ROADMAP_STORAGE_KEY, data);
+                this.flushSyncQueueDebounced();
+
             } else {
-                // nếu không có data thì xóa luôn cho sạch
                 localStorage.removeItem(ROADMAP_STORAGE_KEY);
+
+                // 🔁 SYNC xoá
+                this.enqueueSyncEvent(ROADMAP_STORAGE_KEY, null);
+                this.flushSyncQueueDebounced();
             }
         } catch (err) {
-            console.error("Lỗi khi lưu lộ trình vào localStorage:", err);
+            console.error("Lỗi khi lưu roadmap:", err);
         }
     },
 
@@ -2524,6 +2573,62 @@ const App = {
             });
         });
     },
+
+    // ======= SHEET SYNC (queue + debounce) =======
+
+    enqueueSyncEvent(key, value) {
+        try {
+            const raw = localStorage.getItem(SYNC_QUEUE_KEY);
+            const q = raw ? JSON.parse(raw) : [];
+            q.push({ key, value, ts: Date.now() });
+            localStorage.setItem(SYNC_QUEUE_KEY, JSON.stringify(q));
+        } catch (e) {
+            console.warn("enqueueSyncEvent failed:", e);
+        }
+    },
+
+    flushSyncQueueDebounced() {
+        if (this.syncTimer) clearTimeout(this.syncTimer);
+        this.syncTimer = setTimeout(() => this.flushSyncQueue(), 800);
+    },
+
+    async flushSyncQueue() {
+        if (!navigator.onLine) return;
+
+        let q = [];
+        try {
+            const raw = localStorage.getItem(SYNC_QUEUE_KEY);
+            q = raw ? JSON.parse(raw) : [];
+        } catch (e) { q = []; }
+
+        if (!q.length) return;
+
+        const uid = localStorage.getItem("h3_username") || "demo-user";
+        const batch = q.slice(0, 50);
+
+        try {
+            const res = await fetch(SHEET_SYNC_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    apiKey: SHEET_SYNC_API_KEY,
+                    uid,
+                    source: "h3_web_github_pages",
+                    version: "v1",
+                    events: batch.map(ev => ({ key: ev.key, value: ev.value, ts: ev.ts }))
+                }),
+            });
+
+            const data = await res.json().catch(() => ({}));
+            if (!data.ok) throw new Error(data.error || "sync_failed");
+
+            const remain = q.slice(batch.length);
+            localStorage.setItem(SYNC_QUEUE_KEY, JSON.stringify(remain));
+        } catch (e) {
+            console.warn("flushSyncQueue failed:", e);
+        }
+    },
+
 };
 
 
