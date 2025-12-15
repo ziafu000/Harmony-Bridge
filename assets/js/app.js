@@ -12,7 +12,7 @@ const BOSS_STATE_KEY = "h3_boss_state_v1";
 const TODAY_LESSON_STATE_KEY = "h3_today_lesson_v1"; // trạng thái checkbox bài học theo ngày
 const TEACHBACK_DB_NAME = "h3_teachback_db_v1";
 const TEACHBACK_DB_STORE = "clips";
-const SHEET_SYNC_URL = "https://script.google.com/macros/s/AKfycbwg4J3QiG_q2q9o0MYdxe6o7jrT9Vb1eh7cPnYiScenZJj8C3_JRTMWRZPnGiO6pGOhEw/exec";
+const SHEET_SYNC_URL = "https://script.google.com/macros/s/AKfycbwg4J3QiG_q2q9o0MYdxe6o7jrT9Vb1eh7cPnYiScenZJj8C3_JRTMWRZPnGiO6pGOhEw/exec"
 const SHEET_SYNC_API_KEY = "H3KEY";
 const SYNC_QUEUE_KEY = "h3_sync_queue_1707200909012009";
 
@@ -2599,33 +2599,34 @@ const App = {
         try {
             const raw = localStorage.getItem(SYNC_QUEUE_KEY);
             q = raw ? JSON.parse(raw) : [];
-        } catch (e) { q = []; }
+        } catch (e) {
+            q = [];
+        }
 
         if (!q.length) return;
 
         const uid = localStorage.getItem("h3_username") || "demo-user";
         const batch = q.slice(0, 50);
 
-        try {
-            const res = await fetch(SHEET_SYNC_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    apiKey: SHEET_SYNC_API_KEY,
-                    uid,
-                    source: "h3_web_github_pages",
-                    version: "v1",
-                    events: batch.map(ev => ({ key: ev.key, value: ev.value, ts: ev.ts }))
-                }),
-            });
+        const payloadObj = {
+            apiKey: SHEET_SYNC_API_KEY,
+            uid,
+            source: "h3_web_github_pages",
+            version: "v1",
+            events: batch.map(ev => ({ key: ev.key, value: ev.value, ts: ev.ts }))
+        };
 
-            const data = await res.json().catch(() => ({}));
-            if (!data.ok) throw new Error(data.error || "sync_failed");
+        // ✅ sendBeacon: không preflight, không cần CORS
+        const ok = navigator.sendBeacon(
+            SHEET_SYNC_URL,
+            new Blob([JSON.stringify(payloadObj)], { type: "text/plain;charset=UTF-8" })
+        );
 
+        if (ok) {
             const remain = q.slice(batch.length);
             localStorage.setItem(SYNC_QUEUE_KEY, JSON.stringify(remain));
-        } catch (e) {
-            console.warn("flushSyncQueue failed:", e);
+        } else {
+            console.warn("sendBeacon failed (will retry later)");
         }
     },
 
